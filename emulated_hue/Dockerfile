@@ -19,7 +19,6 @@ RUN \
         --no-cache-dir \
         -r hass_emulated_hue/requirements.txt \
     && cp -R hass_emulated_hue/emulated_hue /usr/local/app/ \
-    && cp hass_emulated_hue/run.py /usr/local/app/run.py \
     && apk del --no-cache --purge .build-dependencies \
     && find /usr/local \
         \( -type d -a -name test -o -name tests -o -name '__pycache__' \) \
@@ -36,7 +35,7 @@ RUN echo $'[supervisord] \n\
 nodaemon=true \n\
 user=root \n\
 [program:hue] \n\
-command=python3 /usr/local/app/run.py \n\
+command=python3 /usr/local/app \n\
 autorestart=true \n\
 stdout_logfile=/dev/fd/1 \n\
 stdout_logfile_maxbytes=0 \n\
